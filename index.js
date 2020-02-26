@@ -14,28 +14,31 @@ console.log(getMyTaxes.call(latvia, 1000));
 function getMiddleTaxes(country) {
   return this.tax * this.middleSalary;
 }
+
+console.log(getMiddleTaxes.call(ukraine));
 console.log(getMiddleTaxes.call(latvia));
+console.log(getMiddleTaxes.call(litva));
 
 // Task #3
 function getTotalTaxes() {
   return this.tax * this.middleSalary * this.vacancies;
 }
+console.log(getTotalTaxes.call(ukraine));
 console.log(getTotalTaxes.call(latvia));
+console.log(getTotalTaxes.call(litva));
 
 // Task #4
-function getMySalary() {
-      const max = 2000;
-      const min = 1500;
-    const salary = Math.floor(Math.random() * (max - min)) + min;
-    const taxes = getMyTaxes.call(this,salary);
-    const profit = salary - taxes;
-    return {
-      salary,
-      taxes,
-      profit
-    };
-  }
-    let interval = setInterval(() => {
-  console.log(getMySalary.call(latvia))
-}, 10000);
-setTimeout(() => clearInterval(interval),5000);
+const getMySalary = function(country){
+    setInterval(() => {
+        const min = 1500;
+        const max = 2000;
+        const salary = Math.floor(Math.random()*(max - min + 1) + min);
+        
+        console.log({ 
+            salary:salary,
+            taxes: country.tax,
+            profit: salary - country.tax       
+        });
+    }, 10000); 
+}
+getMySalary(ukraine);
